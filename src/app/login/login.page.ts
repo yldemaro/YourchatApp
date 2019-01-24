@@ -10,21 +10,30 @@ import { Router } from '@angular/router';
 })
 export class LoginPage {
 
-  username: string ;
-  password: string;
+  // He cambiado la variable de usuario por email
+
+
+  email: string = '';
+  password: string = '';
 
   constructor(public afs: AngularFireAuth, public rout: Router) { }
 
   async login() {
 
-    const { username, password } = this;
-    console.log(username, password);
+    const { email, password } = this;
+    console.log(email, password);
     try {
-      const res = await this.afs.auth.signInWithEmailAndPassword(username, password);
+      const res = await this.afs.auth.signInWithEmailAndPassword(email, password);
       console.log(res);
       this.rout.navigateByUrl('tabs/tab1');
     } catch (error) {
-      console.log(error);
+      console.log(error.code);
+      if (error.code === 'auth/invalid-email') {
+        alert('Ingreso mal el email');
+      }
+      if (error.code === 'auth/wrong-password') {
+        alert('Ingreso mal el password');
+      }
     }
   }
   async loginGmail() {
