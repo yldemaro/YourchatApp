@@ -10,17 +10,20 @@ import { Router } from '@angular/router';
 })
 export class LoginPage {
 
-  username: string = '';
+  // He cambiado la variable de usuario por email
+
+
+  email: string = '';
   password: string = '';
 
   constructor(public afs: AngularFireAuth, public rout: Router) { }
 
   async login() {
 
-    const { username, password } = this;
-    console.log(username, password);
+    const { email, password } = this;
+    console.log(email, password);
     try {
-      const res = await this.afs.auth.signInWithEmailAndPassword(username, password);
+      const res = await this.afs.auth.signInWithEmailAndPassword(email, password);
       console.log(res);
       this.rout.navigateByUrl('tabs/tab1');
     } catch (error) {

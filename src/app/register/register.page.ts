@@ -10,22 +10,28 @@ import { Router } from '@angular/router';
 })
 export class RegisterPage {
 
-  username: string = '';
+  // Cambio de usuario por email
+
+  email: string = '';
   password: string = '';
   cpassword: string = '';
 
   constructor(public afr: AngularFireAuth, public rout: Router) { }
 
+  // Register function
+
   async register() {
 
-    const { username, password, cpassword } = this;
+    const { email, password, cpassword } = this;
+
+    // Comparacion contraseñas 
 
     if (password !== cpassword) {
       return console.error('las contraseñas no son iguales');
     }
 
     try {
-      const res = this.afr.auth.createUserWithEmailAndPassword(username, password);
+      const res = this.afr.auth.createUserWithEmailAndPassword(email, password);
       console.log(res);
       this.rout.navigateByUrl('/login');
     } catch (error) {
@@ -34,7 +40,7 @@ export class RegisterPage {
 
 
   }
-
+  // Registro con email
   async registerGmail() {
 
     try {

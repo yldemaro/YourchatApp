@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 import { ServicesService } from './services.service';
 
 
-//firebase
+// firebase
 import Config from './firebase';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
