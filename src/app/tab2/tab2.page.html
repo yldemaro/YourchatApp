@@ -1,7 +1,21 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-title>
-            Tus grupos
+            Chateando
+            {{username}}
         </ion-title>
     </ion-toolbar>
 </ion-header>
+
+
+<ion-content>
+    <ion-card *ngFor="let mess of chat">
+        <ion-card-header>
+            {{mess.nombre}} dice:
+        </ion-card-header>
+    </ion-card>
+    <form action="">
+        <textarea name="" id="" cols="30" rows="2"></textarea>
+        <ion-button button style="background:dargray;">Enviar</ion-button>
+    </form>
+</ion-content>

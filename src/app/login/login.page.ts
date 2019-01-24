@@ -24,7 +24,13 @@ export class LoginPage {
       console.log(res);
       this.rout.navigateByUrl('tabs/tab1');
     } catch (error) {
-      console.log(error);
+      console.log(error.code);
+      if (error.code === 'auth/invalid-email') {
+        alert('Ingreso mal el email');
+      }
+      if (error.code === 'auth/wrong-password') {
+        alert('Ingreso mal el password');
+      }
     }
   }
   async loginGmail() {

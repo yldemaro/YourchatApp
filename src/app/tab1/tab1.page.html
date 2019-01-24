@@ -1,12 +1,44 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-title>
             Inicio
         </ion-title>
-        <button class="btn btn-primary" (click)="signOut()"><ion-icon name="close"></ion-icon> Salir</button>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <ion-grid>
+        <ion-row text-center>
+            <ion-col col-4>
+                <ion-button color="primary">Crear Grupo</ion-button>
+            </ion-col>
+            <ion-col col-4>
+                <ion-button color="secondary">Perfil</ion-button>
+            </ion-col>
+            <ion-col col-4>
+                <ion-button color="danger" (click)="signOut()">Salir</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <div *ngIf="_cs.usuario.uid">
+        <h3>Tendencias</h3>
+    </div>
+    <!-- <app-loading *ngIf="loading1"></app-loading> -->
+
+    <div *ngFor=" let variable of _cs.tendencias , let i = index">
+
+        <div class="media animated fadeIn" [routerLink]="['/chat' , variable.nombre ]" *ngIf="_cs.usuario.uid">
+            <div class="image-cropper">
+                <img style="margin-left:0%;" class="rounded" [src]='variable.url'>
+            </div>
+
+            <div class="media-body">
+                <h5 class="mt-0"> {{ variable.nombre }}</h5>
+                {{ variable.desc }}
+                <hr>
+            </div>
+        </div>
+    </div>
 
 </ion-content>

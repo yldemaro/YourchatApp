@@ -28,21 +28,23 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.aut.authState
+        .subscribe(
+          user => {
+            if (user) {
+              this.rout.navigateByUrl('tabs/tab1');
+            } else {
+              this.rout.navigateByUrl('/login');
+            }
+          },
+          () => {
+            this.rout.navigateByUrl('/login');
+          }
+        );
     });
 
 
-    this.aut.authState
-      .subscribe(
-        user => {
-          if (user) {
-            this.rout.navigateByUrl('tabs/tab1');
-          } else {
-            this.rout.navigateByUrl('/login');
-          }
-        },
-        () => {
-          this.rout.navigateByUrl('/login');
-        }
-      );
+
   }
 }
