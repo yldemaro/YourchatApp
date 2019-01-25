@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
+import { ServicesService } from '../services.service';
 
 @Component({
   selector: 'app-tab2',
@@ -8,9 +9,12 @@ import { auth } from 'firebase/app';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  username: String = '';
-  message: String = '';
-  chat = [];
+
+  loading1 = true;
+  loading2 = true;
+  loading3 = true;
+  nogrupos = false;
+  grupos: any = [];
 
   // ESTA ES LA PESTAÑA DE TUS GRUPOS
 
@@ -20,7 +24,15 @@ export class Tab2Page {
   // DE ESTO ME ENCARGO YO
 
 
-  constructor(public afr: AngularFireAuth) {
-    this.username = this.afr.auth.currentUser.email;
+  constructor(public afr: AngularFireAuth, public _cs: ServicesService) {
+    setTimeout(() => {
+      this.loading2 = false;
+      this._cs.cargarGrupos().subscribe((data: any) => {
+        console.log(data.length);
+        this.grupos = data;
+        console.log(this.grupos);
+      });
+      this.nogrupos = true;
+    }, 2000);
   }
 }

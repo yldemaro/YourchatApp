@@ -8,14 +8,35 @@
 </ion-header>
 
 
-<ion-content>
-    <ion-card *ngFor="let mess of chat">
-        <ion-card-header>
-            {{mess.nombre}} dice:
-        </ion-card-header>
-    </ion-card>
-    <form action="">
-        <textarea name="" id="" cols="30" rows="2"></textarea>
-        <ion-button button style="background:dargray;">Enviar</ion-button>
-    </form>
+<ion-content padding>
+    <div margin-top *ngIf="_cs.usuario.uid">
+        <h3>Tus Grupos</h3>
+        <ion-spinner name="bubbles" *ngIf="loading2"></ion-spinner>
+    </div>
+
+    <div *ngFor=" let variable of grupos , let i = index">
+
+        <div class="media animated fadeIn" [routerLink]="['/chat' , variable.nombre ]" *ngIf="_cs.usuario.uid">
+            <div class="image-cropper" style="text-align: center;">
+                <img class="" [src]='variable.url'>
+            </div>
+
+            <div margin-left class="media-body">
+                <h5 class="mt-0"> {{ variable.nombre }}</h5>
+                {{ variable.desc }}
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="_cs.usuario.uid">
+        <div *ngIf='(grupos)?.length === 0'>
+            <div *ngIf='nogrupos === true'>
+                <img [routerLink]="['/buscar']" src="assets/nogrupos.png" class="rounded mx-auto d-block" style="text-align: center">
+                <h4 style="text-align: center;color:#00D3FA;">No tienes todavia grupos!</h4>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
 </ion-content>

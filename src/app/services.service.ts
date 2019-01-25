@@ -4,6 +4,7 @@ import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class ServicesService {
   uid: string;
   public usuario: any = {};
 
-  constructor(private afs: AngularFirestore, public afAuth: AngularFireAuth, private route: Router) {
+  constructor(private afs: AngularFirestore, public afAuth: AngularFireAuth,
+    private route: Router, private http: HttpClient) {
     this.afAuth.authState.subscribe(user => {
       // console.log('Estado' , user );
       if (!user) {
@@ -51,20 +53,21 @@ export class ServicesService {
   }
 
   cargarGrupos() {
-    this.itemsCollection4 = this.afs.collection<any>(`users/${this.uid}/grupos`, ref => ref.limit(50));
-    return this.itemsCollection4.valueChanges().pipe(map((grupos: any[]) => {
-      // console.log(this.usuario.uid);
-      // console.log(grupos);
+    return this.http.get(`http://yourchat.openode.io/user/${this.uid}/groups`);
+    // this.itemsCollection4 = this.afs.collection<any>(`users/${this.uid}/grupos`, ref => ref.limit(50));
+    // return this.itemsCollection4.valueChanges().pipe(map((grupos: any[]) => {
+    //   // console.log(this.usuario.uid);
+    //   // console.log(grupos);
 
-      this.grupos = [];
+    //   this.grupos = [];
 
-      for (const grupo of grupos) {
-        this.grupos.unshift(grupo);
-      }
+    //   for (const grupo of grupos) {
+    //     this.grupos.unshift(grupo);
+    //   }
 
-      console.log(this.grupos);
-      return this.grupos;
-    })); // Para estar pendienete de los cambios ahora en el componente te suscribes eso
+    //   console.log(this.grupos);
+    //   return this.grupos;
+    // }));
   }
 
   cargarCategorias() {
