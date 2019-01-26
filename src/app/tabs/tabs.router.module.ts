@@ -5,11 +5,11 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: 'yourchatApp',
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'home',
         children: [
           {
             path: '',
@@ -18,7 +18,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'grupos',
         children: [
           {
             path: '',
@@ -27,7 +27,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab3',
+        path: 'profile',
         children: [
           {
             path: '',
