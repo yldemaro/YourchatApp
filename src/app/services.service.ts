@@ -42,7 +42,7 @@ export class ServicesService {
   }
 
   cargarGrupos() {
-    return this.http.get(`http://yourchat.openode.io/user/${this.uid}/groups`);
+    return this.http.get(`http://yourchat.openode.io/users/${this.uid}/groups`);
   }
 
   cargarCategorias() {

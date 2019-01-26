@@ -12,9 +12,9 @@ export class RegisterPage {
 
   // Cambio de usuario por email
 
-  email: string = '';
-  password: string = '';
-  cpassword: string = '';
+  email: string ;
+  password: string ;
+  cpassword: string ;
 
   constructor(public afr: AngularFireAuth, public rout: Router) { }
 
@@ -24,7 +24,7 @@ export class RegisterPage {
 
     const { email, password, cpassword } = this;
 
-    // Comparacion contraseñas 
+    // Comparacion contraseñas
 
     if (password !== cpassword) {
       return console.error('las contraseñas no son iguales');
@@ -52,6 +52,9 @@ export class RegisterPage {
     }
 
 
+  }
+  goLogin() {
+    this.rout.navigateByUrl('/login');
   }
 
 }
