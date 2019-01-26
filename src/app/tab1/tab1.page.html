@@ -23,30 +23,29 @@
     </ion-grid>
 
     <div margin-top *ngIf="_cs.usuario.uid">
-        <h3>Tendencias</h3>
+        <h2>Tendencias</h2>
         <ion-spinner name="bubbles" *ngIf="loading1"></ion-spinner>
     </div>
 
 
 
-    <div *ngFor=" let variable of _cs.tendencias , let i = index">
+    <div *ngFor=" let variable of tendencias , let i = index">
 
         <div class="media animated fadeIn" [routerLink]="['/chat' , variable.nombre ]" *ngIf="_cs.usuario.uid">
             <div class="image-cropper">
                 <img style="margin-left:0%;" class="rounded" [src]='variable.url'>
             </div>
 
-            <div class="media-body">
+            <div style="height:60px;" class="media-body">
                 <h5 class="mt-0"> {{ variable.nombre }}</h5>
-                {{ variable.desc }}
-                <hr>
+                <p>{{ variable.desc }}</p>
             </div>
         </div>
     </div>
 
-    
+
     <div margin-top *ngIf="_cs.usuario.uid">
-        <h3>Categorias</h3>
+        <h2>Categorias</h2>
         <ion-spinner name="bubbles" *ngIf="loading3"></ion-spinner>
     </div>
 
