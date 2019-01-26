@@ -1,0 +1,35 @@
+ion-item{
+    border-bottom: 1px solid #00D4FF;
+}
+ion-label{
+    color: #999;
+}
+
+
+.boton1{
+    background:white !important;
+    border-radius: 15px;
+    border:1px solid #00D4FF;
+    color:#00D4FF;
+    padding:10px;
+    font-size: 1rem;
+}
+.boton1:hover{
+    background: #00D4FF !important;
+    color:white;
+}
+
+.boton1,.boton2{
+    width:100%;
+}
+
+.boton2{
+    box-shadow: 0 3px 20px rgba(39, 68, 74, 0.2);
+    color: grey;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 2rem;
+}
+.button2:hover {
+    box-shadow: 0 1px 5px rgba(39, 68, 74, 0.2);
+}
