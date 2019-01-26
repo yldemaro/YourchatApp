@@ -38,36 +38,11 @@ export class ServicesService {
 
 
   cargarTendencias() {
-    this.itemsCollection2 = this.afs.collection<any>(`tendencias/`, ref => ref.limit(500));
-
-    return this.itemsCollection2.valueChanges().pipe(map((tendencias: any) => {
-      this.tendencias = [];
-
-      for (const tendencia of tendencias) {
-        this.tendencias.unshift(tendencia);  // Aqui es donde siempre te equivocas haciendo unshift mal asi que atento
-      }
-
-      console.log(this.tendencias);
-      return this.tendencias;
-    }));
+    return this.http.get('http://yourchat.openode.io/tendencias/tendencias/grupos');
   }
 
   cargarGrupos() {
     return this.http.get(`http://yourchat.openode.io/user/${this.uid}/groups`);
-    // this.itemsCollection4 = this.afs.collection<any>(`users/${this.uid}/grupos`, ref => ref.limit(50));
-    // return this.itemsCollection4.valueChanges().pipe(map((grupos: any[]) => {
-    //   // console.log(this.usuario.uid);
-    //   // console.log(grupos);
-
-    //   this.grupos = [];
-
-    //   for (const grupo of grupos) {
-    //     this.grupos.unshift(grupo);
-    //   }
-
-    //   console.log(this.grupos);
-    //   return this.grupos;
-    // }));
   }
 
   cargarCategorias() {

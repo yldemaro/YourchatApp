@@ -17,39 +17,23 @@ export class Tab1Page {
   loading3 = true;
   nogrupos = false;
   grupos: any = [];
+  tendencias: any = [];
 
   constructor(private aut: AngularFireAuth,
     private router: Router, public _cs: ServicesService) {
 
-    
-
-    // this._cs.cargarGrupos().subscribe((data2) => {
-    //   console.log(data2);
-    // });
-
 
     this._cs.cargarTendencias().subscribe((data2) => {
-      console.log(data2);
       this.loading1 = false;
+      console.log(data2);
+      this.tendencias = data2;
+
     });
 
     this._cs.cargarCategorias().subscribe((data3) => {
       console.log(data3);
       this.loading3 = false;
     });
-
-    // this.nogrupos = true;
-
-    // this._cs.cargarTendencias().subscribe((data) => {
-    //   console.log(data);
-    //   this.loading1 = false;
-    // });
-    // this._cs.cargarGrupos().subscribe((data2) => {
-    //   console.log(data2);
-    // });
-    // this._cs.cargarCategorias().subscribe((data3) => {
-    //   console.log(data3);
-    // });
 
   }
 
