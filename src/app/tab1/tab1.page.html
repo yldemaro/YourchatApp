@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary" text-center>
         <ion-title>
             Inicio
         </ion-title>
@@ -10,14 +10,8 @@
 
     <ion-grid>
         <ion-row text-center>
-            <ion-col col-4>
-                <ion-button color="primary">Crear Grupo</ion-button>
-            </ion-col>
-            <ion-col col-4>
-                <ion-button color="secondary">Perfil</ion-button>
-            </ion-col>
-            <ion-col col-4>
-                <ion-button color="danger" (click)="signOut()">Salir</ion-button>
+            <ion-col col-12>
+                <ion-button expand="full" color="danger" (click)="signOut()">Salir</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -54,7 +48,7 @@
     <ion-grid *ngIf="_cs.usuario.uid">
         <ion-row text-center>
             <ion-col size="6" *ngFor="let categoria of _cs.categorias">
-                <img width="100px" [routerLink]="['/categoria' , categoria.nombre]" class="rounded" [src]="categoria.url">
+                <img width="100px" [routerLink]="['/categDetalles/' , categoria.nombre]" class="rounded" [src]="categoria.url">
                 <p style="text-align: center">{{ categoria.nombre }}</p>
             </ion-col>
 
