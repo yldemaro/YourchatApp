@@ -10,14 +10,21 @@
 
   <ion-button color="primary" [routerLink]="['/yourchatApp/home']">Volver</ion-button>
 
+
+  <h3>GRUPOS ASIGNADOS A TU CUENTA</h3>
+  <ion-spinner name="bubbles" *ngIf="loading"></ion-spinner>
   <ion-grid *ngFor="let categoria of cat">
     <ion-row>
       <ion-col size='3'><img [src]='categoria.url' alt=""></ion-col>
       <ion-col size='9'>
-        <h3 no-margin >{{categoria.nombre}}</h3>
+        <h3 no-margin>{{categoria.nombre}}</h3>
         <p no-margin style="font-size:12px;">{{categoria.desc}}</p>
         <p float-right><small>{{categoria.fecha | date}}</small></p>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <div *ngIf="cat.length===0">
+    no tiene grupo asignado
+  </div>
 </ion-content>

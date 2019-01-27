@@ -25,7 +25,7 @@ export class LoginPage {
     try {
       const res = await this.afs.auth.signInWithEmailAndPassword(email, password);
       console.log(res);
-      this.rout.navigateByUrl('tabs/tab1');
+      this.rout.navigateByUrl('yourchatApp/home');
     } catch (error) {
       console.log(error.code);
       if (error.code === 'auth/invalid-email') {
@@ -40,7 +40,7 @@ export class LoginPage {
     try {
       const res = await this.afs.auth.signInWithPopup(new auth.GoogleAuthProvider());
       console.log(res);
-      this.rout.navigateByUrl('tabs/tab1');
+      this.rout.navigateByUrl('yourchatApp/home');
     } catch (error) {
       console.log(error);
     }
