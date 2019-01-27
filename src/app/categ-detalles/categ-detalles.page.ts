@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CategDetallesPage implements OnInit {
 
-  cat: any = '';
+  cat: any ;
 
   constructor(public active: ActivatedRoute, private http: HttpClient) {
 
@@ -21,11 +21,11 @@ export class CategDetallesPage implements OnInit {
 
   async cargardetallesCat() {
 
-    let nombre = this.active.params._value.nombre;
-    console.log(nombre);
-    this.http.get(`http://yourchat.openode.io/categorias/${nombre}/grupos`).subscribe((data: any) => {
-      this.cat = data;
-    });
+    // // let nombre = this.active.params._value.nombre;
+    // // console.log(nombre);
+    // this.http.get(`http://yourchat.openode.io/categorias/${nombre}/grupos`).subscribe((data: any) => {
+    //   this.cat = data;
+    // });
   }
 
 }
