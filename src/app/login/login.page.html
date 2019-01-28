@@ -6,26 +6,30 @@
 
 <ion-content padding text-center>
     <div>
-        <h4>Sign In</h4>
+        <h4>Sign Up</h4>
     </div>
     <div margin-top>
         <h1 style="color:#00D4FF;font-size:45px;">Yourchat</h1>
     </div>
-    <ion-list>
+    <ion-list style="border-bottom:1px solid rgb(226, 222, 222);">
 
         <ion-item>
-            <ion-label style="color: #999;">Email</ion-label>
+            <ion-label position="floating" style="color: #999;">Email</ion-label>
             <ion-input type="text" [(ngModel)]="email"></ion-input>
         </ion-item>
 
         <ion-item>
-            <ion-label style="color: #999;">Password</ion-label>
+            <ion-label position="floating" style="color: #999;">Password</ion-label>
             <ion-input type="password" [(ngModel)]="password"></ion-input>
         </ion-item>
 
+        <ion-item margin-top margin-bottom style="border:none;">
+            <button margin-bottom class="boton1" (click)="login()">Inicio Sesión</button>
+        </ion-item>
+
     </ion-list>
-    <button margin-bottom class="boton1" (click)="login()">Inicio Sesión</button>
-    <button class="boton2" (click)="loginGmail()"> <img width="25px" src="assets/google.png"
-        class="flex self-center pr2" > Inicio con Google</button>
-    <p>No tienes Cuenta? <a style="color:#00D4FF;" (click)="iraRegister()">Registrate</a></p>
+
+    <button margin-bottom class="boton2" (click)="loginGmail()"> <img width="25px" src="assets/google.png" class="flex self-center pr2">
+        Inicio con Google</button>
+    <p margin-top>No tienes Cuenta? <a style="color:#00D4FF;" (click)="iraRegister()">Registrate</a></p>
 </ion-content>

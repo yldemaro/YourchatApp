@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ServicesService } from '../services.service';
 
 @Component({
   selector: 'app-categ-detalles',
@@ -12,7 +13,7 @@ export class CategDetallesPage implements OnInit {
   cat: any = [];
   loading = true;
 
-  constructor(public active: ActivatedRoute, private http: HttpClient) {
+  constructor(public active: ActivatedRoute, private http: HttpClient, public _cs: ServicesService) {
 
   }
 

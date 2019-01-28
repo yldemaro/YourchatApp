@@ -6,6 +6,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'categDetalles/:nombre', loadChildren: './categ-detalles/categ-detalles.module#CategDetallesPageModule' },
+  { path: 'chat/:nombre', loadChildren: './chat/chat.module#ChatPageModule' },
+
 
 ];
 @NgModule({

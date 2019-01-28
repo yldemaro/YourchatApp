@@ -5,12 +5,14 @@ import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Mensaje } from './interface/mensaje.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesService {
 
+  private itemsCollection: AngularFirestoreCollection<Mensaje>;
   private itemsCollection2: AngularFirestoreCollection<any>;
   private itemsCollection4: AngularFirestoreCollection<any>;
   private itemsCollection5: AngularFirestoreCollection<any>;
@@ -20,6 +22,7 @@ export class ServicesService {
   public categorias: any[] = [];
   uid: string;
   public usuario: any = {};
+  public chats: Mensaje[] = [];
 
   constructor(private afs: AngularFirestore, public afAuth: AngularFireAuth,
     private route: Router, private http: HttpClient) {
@@ -59,6 +62,34 @@ export class ServicesService {
       // console.log(this.categorias);
       return this.categorias;
     }));
+  }
+
+  cargarMensajes(chatid: string) {
+    this.itemsCollection = this.afs.collection<Mensaje>(`chats/${chatid}/mensajes`, ref => ref.orderBy('fecha', 'desc').limit(500));
+    console.log(chatid);
+    return this.itemsCollection.valueChanges().pipe(map((mensajes: Mensaje[]) => {
+      // console.log(mensajes );
+      this.chats = [];
+
+      for (const mensaje of mensajes) {
+        this.chats.unshift(mensaje);
+      }
+
+      return this.chats;
+    })); // Para estar pendienete de los cambios ahora en el componente te suscribes eso
+  }
+
+  agregarMensaje(texto: any, img) {
+
+    const mensaje: Mensaje = {
+      nombre: this.usuario.nombre,
+      mensaje: texto,
+      fecha: new Date().getTime(),
+      uid: this.usuario.uid,
+      img: img
+    };
+    return this.itemsCollection.add(mensaje);
+
   }
 
 }
