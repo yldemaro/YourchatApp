@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{variable}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div *ngFor=" let chat of chat">
+
+    <div [ngClass]="{ 'enviado' : _cs.usuario.uid == chat.uid  , 'recibido' : _cs.usuario.uid != chat.uid}">
+      <div *ngIf=" chat.img == false ">{{ chat.mensaje }} </div>
+      <img *ngIf=" chat.img == true " src={{chat.mensaje}} class="img-thumbnail">
+      <span class="badge badge-primary " [ngClass]="{ 'badge-info' : _cs.usuario.uid == chat.uid  , 'badge-success' : _cs.usuario.uid != chat.uid}">{{
+        chat.nombre }}</span>
+    </div>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+    <input style="border-right: none;" name="mensaje" [(ngModel)]="mensaje" (keyup.enter)="enviar_mensaje()" placeholder="Enviar mensaje" type="text" class="form-control" placeholder="Escribe en el chat.." aria-label="Escribe en el chat.." aria-describedby="button-addon2">
+</ion-footer>
