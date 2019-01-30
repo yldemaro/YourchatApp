@@ -15,7 +15,7 @@
   <ion-spinner name="bubbles" *ngIf="loading"></ion-spinner>
   <ion-grid *ngFor="let categoria of cat" [routerLink]="['/chat' , categoria.nombre ]">
     <ion-row  *ngIf="_cs.usuario.uid">
-      <ion-col size='3'><img [src]='categoria.url' alt=""></ion-col>
+      <ion-col size='3'><img style="border-radius:50%;" height="59px" [src]='categoria.url' alt=""></ion-col>
       <ion-col size='9'>
         <h3 no-margin>{{categoria.nombre}}</h3>
         <p no-margin style="font-size:12px;">{{categoria.desc}}</p>
