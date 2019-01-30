@@ -12,6 +12,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ServicesService } from './services.service';
 
+import { Camera } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/File/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+
+import { IonicStorageModule } from '@ionic/storage';
+
 
 // firebase
 import Config from './firebase';
@@ -28,13 +35,18 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFireModule.initializeApp(Config),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,
     SplashScreen,
     ServicesService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Camera,
+    File,
+    WebView,
+    FilePath
   ],
   bootstrap: [AppComponent]
 })

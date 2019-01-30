@@ -1,23 +1,49 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>{{variable}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-  <div *ngFor=" let chat of chat">
+  <ion-button color="primary" [routerLink]="['/yourchatApp/home']">Volver</ion-button>
 
-    <div [ngClass]="{ 'enviado' : _cs.usuario.uid == chat.uid  , 'recibido' : _cs.usuario.uid != chat.uid}">
-      <div *ngIf=" chat.img == false ">{{ chat.mensaje }} </div>
-      <img *ngIf=" chat.img == true " src={{chat.mensaje}} class="img-thumbnail">
-      <span class="badge badge-primary " [ngClass]="{ 'badge-info' : _cs.usuario.uid == chat.uid  , 'badge-success' : _cs.usuario.uid != chat.uid}">{{
-        chat.nombre }}</span>
+  <div class="app-mensajes" id="app-mensajes">
+    <div *ngFor=" let chat of chat">
+
+      <div [ngClass]="{ 'enviado' : _cs.usuario.uid == chat.uid  , 'recibido' : _cs.usuario.uid != chat.uid}">
+        <div *ngIf=" chat.img == false ">{{ chat.mensaje }} </div>
+        <img *ngIf=" chat.img == true " src="{{chat.mensaje}}" class="img-thumbnail">
+        <span class="badge badge-primary " [ngClass]="{ 'badge-info' : _cs.usuario.uid == chat.uid  , 'badge-success' : _cs.usuario.uid != chat.uid}">{{
+          chat.nombre }}</span>
+      </div>
+
     </div>
-
   </div>
 </ion-content>
 
 <ion-footer>
-    <input style="border-right: none;" name="mensaje" [(ngModel)]="mensaje" (keyup.enter)="enviar_mensaje()" placeholder="Enviar mensaje" type="text" class="form-control" placeholder="Escribe en el chat.." aria-label="Escribe en el chat.." aria-describedby="button-addon2">
+  <ion-toolbar color="light" text-center>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="8">
+          <input style="border-right: none;" name="mensaje" [(ngModel)]="mensaje" (keyup.enter)="enviar_mensaje()"
+            placeholder="Enviar mensaje" type="text" class="form-control" placeholder="Escribe en el chat.." aria-label="Escribe en el chat..">
+        </ion-col>
+        <ion-col size="2">
+          <button style="border-right:none;border-left: none;margin-left: 0px;margin-right: 0px;" class="btn btn-outline-secondary"
+            type="button" id="button-addon2" id="get_file" (click)="selectImage() ">
+            <span style="color: #00D3FA;">
+              <ion-icon name="camera"></ion-icon>
+            </span>
+          </button>
+        </ion-col>
+        <ion-col size="2">
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="cargarImagenes()" (click)="enviar_mensaje()"><span
+              style="color: #00D3FA;"> <i class="fas fa-arrow-right"></i></span></button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+
 </ion-footer>
