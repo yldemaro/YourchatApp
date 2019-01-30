@@ -1,29 +1,31 @@
-ion-item{
+ion-item {
     border-bottom: 1px solid #00D4FF;
 }
-ion-label{
+
+ion-label {
     color: #999;
 }
 
-
-.boton1{
-    background:white !important;
+.boton1 {
+    background: white !important;
     border-radius: 15px;
-    border:1px solid #00D4FF;
-    color:#00D4FF;
-    padding:10px;
+    border: 1px solid #00D4FF;
+    color: #00D4FF;
+    padding: 10px;
     font-size: 1rem;
 }
-.boton1:hover{
+
+.boton1:hover {
     background: #00D4FF !important;
-    color:white;
+    color: white;
 }
 
-.boton1,.boton2{
-    width:100%;
+.boton1,
+.boton2 {
+    width: 100%;
 }
 
-.boton2{
+.boton2 {
     background: white;
     box-shadow: 0 3px 20px rgba(39, 68, 74, 0.2);
     color: grey;
@@ -32,7 +34,52 @@ ion-label{
     font-size: 1rem;
     line-height: 2rem;
 }
+
 .button2:hover {
     box-shadow: 0 1px 5px rgba(39, 68, 74, 0.2);
     transform: translateY(10);
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:500);
+.google-btn {
+    width: 184px!important;
+    height: 42px!important;
+    background-color: #4285f4!important;
+    border-radius: 2px!important;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+    margin-left: 25%!important;
+}
+
+.google-btn .google-icon-wrapper {
+    position: absolute!important;
+    margin-top: 1px!important;
+    margin-left: 1px!important;
+    width: 40px!important;
+    height: 40px;
+    border-radius: 2px;
+    background-color: #fff;
+}
+
+.google-btn .google-icon {
+    margin-top: 11px!important;
+    margin-left: 11px!important;
+    width: 18px!important;
+    height: 18px!important;
+}
+
+.google-btn .btn-text {
+    float: right!important;
+    margin: 11px 11px 0 0!important;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: "Roboto";
+}
+
+.google-btn:hover {
+    box-shadow: 0 0 6px #4285f4;
+}
+
+.google-btn:active {
+    background: #1669f2;
 }
