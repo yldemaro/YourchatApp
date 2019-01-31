@@ -1,12 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-button align-left [routerLink]="['/yourchatApp/home']"><i class="fas fa-arrow-left"></i></ion-button>
     <ion-title>{{variable}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-  <ion-button color="primary" [routerLink]="['/yourchatApp/home']">Volver</ion-button>
+
 
   <div class="app-mensajes" id="app-mensajes">
     <div *ngFor=" let chat of chat">

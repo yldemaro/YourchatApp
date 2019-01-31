@@ -12,8 +12,12 @@ export class CategDetallesPage implements OnInit {
   ruta = '';
   cat: any = [];
   loading = true;
+  uid: any;
 
   constructor(public active: ActivatedRoute, private http: HttpClient, public _cs: ServicesService) {
+
+    this.uid = this._cs.uid;
+    console.log(this.uid);
 
   }
 

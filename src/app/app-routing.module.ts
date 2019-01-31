@@ -7,6 +7,8 @@ const routes: Routes = [
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'categDetalles/:nombre', loadChildren: './categ-detalles/categ-detalles.module#CategDetallesPageModule' },
   { path: 'chat/:nombre', loadChildren: './chat/chat.module#ChatPageModule' },
+  { path: 'editarUsuario/:id', loadChildren: './editar-usuario/editar-usuario.module#EditarUsuarioPageModule' },
+
 
 
 ];
