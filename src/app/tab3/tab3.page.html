@@ -1,9 +1,47 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-button align-left [routerLink]="['/yourchatApp/home']"><i class="fas fa-arrow-left"></i></ion-button>
         <ion-title>
-            Perfil
+            My Chat
         </ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+
+    <div text-center>
+        <h4 style="color:#999;">{{ruta}}</h4>
+    </div>
+    <div text-center>
+        <ion-spinner name="bubbles" *ngIf="loading"></ion-spinner>
+    </div>
+
+    <div *ngIf='noperfil===0' text-center>
+        <div>
+            <img src="assets/icono.png" class="rounded mx-auto d-block imagen-nogrupo " style="text-align: center">
+            <h4 style="text-align: center;color:#00D3FA;">Perfil Vacio</h4>
+        </div>
+    </div>
+
+    <div *ngFor='let usuar of usu'>
+        <div text-center>
+            <img width="100px" [src]="usuar.url" alt="" style="border-radius:50%;">
+        </div>
+
+        <ion-card>
+            <ion-card-subtitle>Nombre</ion-card-subtitle>
+            <ion-card-title>
+                <h3 style="color:#00D3FA;">{{usuar.name}}</h3>
+            </ion-card-title>
+            <ion-card-content>
+                <h4>{{usuar.desc}}</h4>
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+    <div text-center>
+        <ion-button expand="full" [routerLink]="['/editarUsuario',uid]">Editar</ion-button>
+    </div>
+
+
+</ion-content>

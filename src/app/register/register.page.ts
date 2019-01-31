@@ -33,7 +33,7 @@ export class RegisterPage {
     try {
       const res = this.afr.auth.createUserWithEmailAndPassword(email, password);
       console.log(res);
-      this.rout.navigateByUrl('/login');
+      this.rout.navigateByUrl('yourchatApp/home');
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +46,7 @@ export class RegisterPage {
     try {
       const res = await this.afr.auth.signInWithPopup(new auth.GoogleAuthProvider());
       console.log(res);
-      this.rout.navigateByUrl('/login');
+      this.rout.navigateByUrl('yourchatApp/home');
     } catch (error) {
       console.log(error);
     }

@@ -12,8 +12,10 @@ import { Mensaje } from './interface/mensaje.interface';
 })
 export class ServicesService {
 
+  public info: any[] = [];
   private itemsCollection: AngularFirestoreCollection<Mensaje>;
   private itemsCollection2: AngularFirestoreCollection<any>;
+  private itemsCollection3: AngularFirestoreCollection<any>;
   private itemsCollection4: AngularFirestoreCollection<any>;
   private itemsCollection5: AngularFirestoreCollection<any>;
 
@@ -27,14 +29,15 @@ export class ServicesService {
   constructor(private afs: AngularFirestore, public afAuth: AngularFireAuth,
     private route: Router, private http: HttpClient) {
     this.afAuth.authState.subscribe(user => {
-      // console.log('Estado' , user );
+      console.log('Estado', user);
       if (!user) {
         return;
       } else {
         this.usuario.nombre = user.displayName;
         this.usuario.uid = user.uid;
         this.uid = user.uid;
-        console.log(this.usuario);
+        localStorage.setItem('uid', this.uid);
+        console.log(this.uid);
       }
     });
   }
@@ -45,7 +48,9 @@ export class ServicesService {
   }
 
   cargarGrupos() {
-    return this.http.get(`http://yourchat.openode.io/users/${this.uid}/groups`);
+    const uid = localStorage.getItem('uid');
+    console.log(this.uid);
+    return this.http.get(`http://yourchat.openode.io/users/${uid}/groups`);
   }
 
   cargarCategorias() {
@@ -80,6 +85,7 @@ export class ServicesService {
   }
 
   agregarMensaje(texto: any, img) {
+    console.log(img);
 
     const mensaje: Mensaje = {
       nombre: this.usuario.nombre,
@@ -90,6 +96,45 @@ export class ServicesService {
     };
     return this.itemsCollection.add(mensaje);
 
+  }
+
+  usuarioInfo() {
+    const uid = localStorage.getItem('uid');
+    this.itemsCollection3 = this.afs.collection<any>(`users/${uid}/info/`, ref => ref.orderBy('fecha', 'desc').limit(1));
+    console.log(this.info);
+    return this.itemsCollection3.valueChanges().pipe(map((info: any[]) => {
+      console.log(info);
+      this.info = [];
+
+      for (const infos of info) {
+        this.info.unshift(infos);
+      }
+
+      return this.info;
+    }));
+
+  }
+
+  editarPerfil(nombre: string, desc: string, uid: string) {
+    this.itemsCollection4 = this.afs.collection<any>(`users/${uid}/info`);
+    this.deleteDoc(uid);
+    const info: any = {
+      name: nombre,
+      desc: desc,
+      fecha: new Date().getTime(),
+    };
+    return this.itemsCollection4.add(info);
+  }
+
+  deleteDoc(uid: string) {
+    this.afs.collection(`users/${uid}/info`,
+      ref => ref.orderBy('order')).valueChanges().subscribe(deletee => {
+        deletee.map((deleteee: any) => {
+          this.afs.doc(`users/${uid}/info`).delete()
+            .catch(error => { console.log(error); })
+            .then(() => console.log(`Deleting question`));
+        });
+      });
   }
 
 }
