@@ -6,6 +6,12 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Mensaje } from './interface/mensaje.interface';
+import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/Camera/ngx';
+
+import * as firebase from 'firebase/app';
+import 'firebase/storage';
+
+declare var window: any;
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +31,21 @@ export class ServicesService {
   uid: string;
   public usuario: any = {};
   public chats: Mensaje[] = [];
+  private CARPETA_IMAGENES = 'img/';
+
+
+  private galleryOptions: CameraOptions = {
+    quality: 50,
+    allowEdit: true,
+    destinationType: this.camera.DestinationType.FILE_URI,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    targetWidth: 800,
+    targetHeight: 800,
+    correctOrientation: true
+  }
 
   constructor(private afs: AngularFirestore, public afAuth: AngularFireAuth,
-    private route: Router, private http: HttpClient) {
+    private route: Router, private http: HttpClient, public camera: Camera) {
     this.afAuth.authState.subscribe(user => {
       console.log('Estado', user);
       if (!user) {
@@ -41,6 +59,78 @@ export class ServicesService {
       }
     });
   }
+
+
+  //open the gallery and Return a promise with the image data
+  uploadFromGallery(data) {
+    this.camera.getPicture(this.galleryOptions).then((imagePath) => {
+      return this.makeFileIntoBlob(imagePath);//convert picture to blob
+    }).then((imageBlob) => {
+      return this.cargarImagenesFirebase(imageBlob);//upload the blob
+    }).then((_uploadSnapshot: any) => {
+    }, (_error) => {
+      alert('Error ' + (_error.message || _error));
+    });
+  }
+
+
+  makeFileIntoBlob(_imagePath) {
+    return new Promise((resolve, reject) => {
+      window.resolveLocalFileSystemURL(_imagePath, (fileEntry) => {
+
+        fileEntry.file((resFile) => {
+
+          const reader = new FileReader();
+          reader.onloadend = (evt: any) => {
+            const imgBlob: any = new Blob([evt.target.result], { type: 'image/jpeg' });
+            imgBlob.name = 'sample.jpg';
+            resolve(imgBlob);
+          };
+
+          reader.onerror = (e) => {
+            console.log('Failed file read: ' + e.toString());
+            reject(e);
+          };
+
+          reader.readAsArrayBuffer(resFile);
+        });
+      });
+    });
+  }
+
+  cargarImagenesFirebase(imgBlob: any) {
+    const randomNumber = Math.floor(Math.random() * 256);
+    console.log('Random number : ' + randomNumber);
+    return new Promise((resolve, reject) => {
+      const storageRef = firebase.storage().ref(this.CARPETA_IMAGENES + randomNumber + '.jpg');//Firebase storage main path
+
+      const metadata: firebase.storage.UploadMetadata = {
+        contentType: 'image/jpeg',
+      };
+
+      const uploadTask = storageRef.put(imgBlob, metadata);
+      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        (snapshot: firebase.storage.UploadTaskSnapshot) => {
+          // upload in progress
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(progress);
+        },
+        (error) => {
+          // upload failed
+          console.log(error);
+          reject(error);
+        },
+        () => {
+          // upload success
+          const img = true;
+          const url = uploadTask.snapshot.downloadURL;
+          alert(uploadTask.snapshot);
+          resolve(uploadTask.snapshot);
+          this.agregarMensaje(url, img);
+        });
+    });
+  }
+
 
 
   cargarTendencias() {
@@ -85,7 +175,6 @@ export class ServicesService {
   }
 
   agregarMensaje(texto: any, img) {
-    console.log(img);
 
     const mensaje: Mensaje = {
       nombre: this.usuario.nombre,

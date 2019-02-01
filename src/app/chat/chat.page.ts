@@ -6,7 +6,8 @@ import { File, FileEntry } from '@ionic-native/File/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Storage } from '@ionic/storage';
 import { FilePath } from '@ionic-native/file-path/ngx';
-import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/Camera/ngx';
+import { FileItem } from '../../models/file-item';
+
 
 @Component({
   selector: 'app-chat',
@@ -18,9 +19,11 @@ export class ChatPage implements OnInit {
   public mensaje: any;
   public chat: any = [];
   public elemento: any;
+  imagen: any;
+  archivos: FileItem[] = [];
 
   constructor(public _cs: ServicesService, private storage: Storage, private platform: Platform,
-    private route: ActivatedRoute, private camera: Camera, private file: File, private filePath: FilePath) {
+    private route: ActivatedRoute, private file: File, private filePath: FilePath) {
 
     let variable = this.route.params.subscribe((data: any) => {
       this.variable = data.nombre;
@@ -44,6 +47,7 @@ export class ChatPage implements OnInit {
     }, 2000);
   }
 
+
   enviar_mensaje() {
     console.log(this.mensaje);
     if (this.mensaje.length === 0) {
@@ -54,38 +58,8 @@ export class ChatPage implements OnInit {
     }
   }
 
-
-  async selectImage() {
-    this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
-  }
-
-  takePicture(sourceType: PictureSourceType) {
-    const options: CameraOptions = {
-      quality: 100,
-      sourceType: sourceType,
-      saveToPhotoAlbum: false,
-      correctOrientation: true
-    };
-
-    this.camera.getPicture(options).then(imagePath => {
-      if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-        this.filePath.resolveNativePath(imagePath)
-          .then(filePath => {
-            let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-            let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-            alert(correctPath);
-            alert(currentName);
-            // this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-          });
-      } else {
-        var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-        var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-        alert(correctPath);
-        alert(currentName);
-        // this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-      }
-    });
-
+  selectImage() {
+    this._cs.uploadFromGallery(this.imagen);
   }
 
 }
