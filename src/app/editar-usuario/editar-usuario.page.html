@@ -7,35 +7,39 @@
 
 <ion-content padding>
 
-  <div *ngIf="_cs.usuario.uid === uid">
+  <div *ngFor="let us of usu">
 
-    <h1>Edita tu perfil</h1>
+    <div *ngIf="_cs.usuario.uid === uid">
 
-    <form novalidate="" (ngSubmit)="guardar(forma)" #forma="ngForm">
-      <!-- <div class="formulario-img">
-        <img src="assets/icono.png" width="30%;" class="rounded mx-auto d-block" alt="...">
-        <p>Arrastra una {{ _cr.nombreimg }}</p>
-      </div> -->
-
-      <!-- <input minlength="5" class="form-control main-container" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="grupo.nombre" required #nombre="ngModel"> -->
-
-      <input minlength="5" class="form-control" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="perfil.nombre"
-        required #nombre="ngModel">
+      <h1>Edita tu perfil</h1>
 
 
+      <form novalidate="" (ngSubmit)="guardar(forma)" #forma="ngForm">
+        <div text-center>
+          <img [src]="us.url" width="50%;"  alt="...">
+          <ion-button color="primary" (click)="cargarImagen()"><ion-icon align-left name="camera"></ion-icon>Actualizar Imagen</ion-button>
+        </div>
 
+        <!-- <input minlength="5" class="form-control main-container" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="grupo.nombre" required #nombre="ngModel"> -->
 
-      <div class="form-group main-container">
-        <label for="exampleFormControlTextarea1">Estado</label>
-        <textarea maxlength="300" class="form-control" id="exampleFormControlTextarea1" placeholder="Aquí tu estado, que todo el mundo puede ver!  "
-          rows="3" name="desc" [(ngModel)]="perfil.desc" required #desc="ngModel"></textarea>
-      </div>
+        <input minlength="5" class="form-control" type="text" placeholder="Nombre" name="nombre" [(ngModel)]="perfil.nombre"
+          required #nombre="ngModel">
 
 
 
-      <button [disabled]="!forma.valid === null " style="background-color: #00D3FA; border-color: #00D3FA;"
-        type="submit" class="btn btn-primary btn-lg btn-block main-container">Actualizar perfil</button>
-    </form>
+
+        <div class="form-group main-container">
+          <label for="exampleFormControlTextarea1">Estado</label>
+          <textarea maxlength="300" class="form-control" id="exampleFormControlTextarea1" placeholder="Aquí tu estado, que todo el mundo puede ver!  "
+            rows="3" name="desc" [(ngModel)]="perfil.desc" required #desc="ngModel"></textarea>
+        </div>
+
+
+
+        <button [disabled]="!forma.valid === null " style="background-color: #00D3FA; border-color: #00D3FA;" type="submit"
+          class="btn btn-primary btn-lg btn-block main-container">Actualizar perfil</button>
+      </form>
+    </div>
 
   </div>
 

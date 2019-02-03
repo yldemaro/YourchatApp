@@ -30,11 +30,11 @@ export class ChatPage implements OnInit {
     });
 
     this._cs.cargarMensajes(this.variable).subscribe((data) => {
-      setTimeout(() => {
-        this.chat = data;
+      this.chat = data;
+
+      setInterval(() => {
         this.elemento.scrollTop = this.elemento.scrollHeight;
-        console.log(this.elemento.scrollHeight);
-      }, 10);
+      }, 100);
     });
   }
 
@@ -43,7 +43,6 @@ export class ChatPage implements OnInit {
 
     setTimeout(() => {
       this.elemento.scrollTop = this.elemento.scrollHeight;
-      console.log(this.elemento.scrollHeight);
     }, 2000);
   }
 

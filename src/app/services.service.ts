@@ -61,7 +61,6 @@ export class ServicesService {
   }
 
 
-  //open the gallery and Return a promise with the image data
   uploadFromGallery(data) {
     this.camera.getPicture(this.galleryOptions).then((imagePath) => {
       return this.makeFileIntoBlob(imagePath);//convert picture to blob
@@ -103,12 +102,14 @@ export class ServicesService {
     console.log('Random number : ' + randomNumber);
     return new Promise((resolve, reject) => {
       const storageRef = firebase.storage().ref(this.CARPETA_IMAGENES + randomNumber + '.jpg');//Firebase storage main path
+      alert(storageRef);
 
       const metadata: firebase.storage.UploadMetadata = {
         contentType: 'image/jpeg',
       };
 
       const uploadTask = storageRef.put(imgBlob, metadata);
+
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot: firebase.storage.UploadTaskSnapshot) => {
           // upload in progress
@@ -122,11 +123,20 @@ export class ServicesService {
         },
         () => {
           // upload success
-          const img = true;
-          const url = uploadTask.snapshot.downloadURL;
-          alert(uploadTask.snapshot);
-          resolve(uploadTask.snapshot);
-          this.agregarMensaje(url, img);
+          alert('imagen cargada correctamente');
+
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            console.log('File available at', downloadURL);
+            const url = downloadURL;
+            alert(url);
+            const imagen = `${url}`;
+            const img = true;
+            this.agregarMensaje(imagen, img);
+          });
+
+          // const url = uploadTask.snapshot.downloadURL;
+          // alert(url);
+          // resolve(uploadTask.snapshot);
         });
     });
   }
@@ -204,11 +214,13 @@ export class ServicesService {
 
   }
 
-  editarPerfil(nombre: string, desc: string, uid: string) {
+  editarPerfil(nombre: string, desc: string, uid: string, img: string) {
+    alert(img);
     this.itemsCollection4 = this.afs.collection<any>(`users/${uid}/info`);
     this.deleteDoc(uid);
     const info: any = {
       name: nombre,
+      url: img,
       desc: desc,
       fecha: new Date().getTime(),
     };
