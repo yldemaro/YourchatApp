@@ -24,6 +24,7 @@ export class ServicesService {
   private itemsCollection3: AngularFirestoreCollection<any>;
   private itemsCollection4: AngularFirestoreCollection<any>;
   private itemsCollection5: AngularFirestoreCollection<any>;
+  private itemsCollection6: AngularFirestoreCollection<any>;
 
   public tendencias: any[] = [];
   public grupos: any[] = [];
@@ -102,7 +103,7 @@ export class ServicesService {
     console.log('Random number : ' + randomNumber);
     return new Promise((resolve, reject) => {
       const storageRef = firebase.storage().ref(this.CARPETA_IMAGENES + randomNumber + '.jpg');//Firebase storage main path
-      alert(storageRef);
+      // alert(storageRef);
 
       const metadata: firebase.storage.UploadMetadata = {
         contentType: 'image/jpeg',
@@ -123,20 +124,15 @@ export class ServicesService {
         },
         () => {
           // upload success
-          alert('imagen cargada correctamente');
+          // alert('imagen cargada correctamente');
 
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             console.log('File available at', downloadURL);
             const url = downloadURL;
-            alert(url);
             const imagen = `${url}`;
             const img = true;
             this.agregarMensaje(imagen, img);
           });
-
-          // const url = uploadTask.snapshot.downloadURL;
-          // alert(url);
-          // resolve(uploadTask.snapshot);
         });
     });
   }
@@ -149,7 +145,7 @@ export class ServicesService {
 
   cargarGrupos() {
     const uid = localStorage.getItem('uid');
-    console.log(this.uid);
+    console.log(uid);
     return this.http.get(`http://yourchat.openode.io/users/${uid}/groups`);
   }
 
@@ -215,7 +211,6 @@ export class ServicesService {
   }
 
   editarPerfil(nombre: string, desc: string, uid: string, img: string) {
-    alert(img);
     this.itemsCollection4 = this.afs.collection<any>(`users/${uid}/info`);
     this.deleteDoc(uid);
     const info: any = {

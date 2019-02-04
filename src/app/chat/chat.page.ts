@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { ServicesService } from '../services.service';
-import { Platform } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { File, FileEntry } from '@ionic-native/File/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
@@ -20,19 +20,19 @@ export class ChatPage implements OnInit {
   public chat: any = [];
   public elemento: any;
   imagen: any;
-  archivos: FileItem[] = [];
 
-  constructor(public _cs: ServicesService, private storage: Storage, private platform: Platform,
+  constructor(public _cs: ServicesService, private storage: Storage, private alertController: AlertController,
     private route: ActivatedRoute, private file: File, private filePath: FilePath) {
 
-    let variable = this.route.params.subscribe((data: any) => {
+    const variable = this.route.params.subscribe((data: any) => {
+      console.log(data);
       this.variable = data.nombre;
     });
 
     this._cs.cargarMensajes(this.variable).subscribe((data) => {
       this.chat = data;
 
-      setInterval(() => {
+      setTimeout(() => {
         this.elemento.scrollTop = this.elemento.scrollHeight;
       }, 100);
     });

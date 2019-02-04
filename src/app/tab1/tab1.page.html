@@ -1,9 +1,11 @@
 <ion-header>
-    <ion-toolbar color="primary" text-center>
+    <ion-toolbar color="primary">
         <ion-title>
-            Inicio
+            YOURCHAT
         </ion-title>
+        <i *ngIf="_cs.usuario.uid" class="fas fa-search" style="color:white;margin-right: 3%;" [routerLink]="['/buscar']" routerLinkActive="router-link-active"></i>
     </ion-toolbar>
+    
 </ion-header>
 
 <ion-content>

@@ -1,13 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-button align-left [routerLink]="['/yourchatApp/home']"><i class="fas fa-arrow-left"></i></ion-button>
+    <i start [routerLink]="['/yourchatApp/home']" class="fas fa-arrow-left mx-2"></i>
     <ion-title>{{variable}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
-
 
   <div class="app-mensajes" id="app-mensajes">
     <div *ngFor=" let chat of chat">
@@ -32,16 +30,16 @@
             placeholder="Enviar mensaje" type="text" class="form-control" placeholder="Escribe en el chat.." aria-label="Escribe en el chat..">
         </ion-col>
         <ion-col size="2">
-          <button style="border-right:none;border-left: none;margin-left: 0px;margin-right: 0px;" class="btn btn-outline-secondary"
+          <button style="border:none;" class="btn btn-outline-secondary"
             type="button" id="get_file"  (click)="selectImage()">
             <span style="color: #00D3FA;">
-              <ion-icon name="camera"></ion-icon>
+              <ion-icon name="camera" style="font-size: 1.5rem"></ion-icon>
             </span>
           </button>
         </ion-col>
         <ion-col size="2">
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="enviar_mensaje()"><span
-              style="color: #00D3FA;"> <i class="fas fa-arrow-right"></i></span></button>
+          <button  style="border:none;" class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="enviar_mensaje()"><span
+              style="color: #00D3FA;"> <i class="fas fa-arrow-right" style="font-size: 1.5rem"></i></span></button>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -40,6 +40,7 @@ export class Tab1Page {
   async signOut() {
     const res = await this.aut.auth.signOut();
     console.log(res);
+    localStorage.clear();
     this.router.navigateByUrl('/login');
   }
 }

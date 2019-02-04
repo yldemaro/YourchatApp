@@ -8,6 +8,9 @@ const routes: Routes = [
   { path: 'categDetalles/:nombre', loadChildren: './categ-detalles/categ-detalles.module#CategDetallesPageModule' },
   { path: 'chat/:nombre', loadChildren: './chat/chat.module#ChatPageModule' },
   { path: 'editarUsuario/:id', loadChildren: './editar-usuario/editar-usuario.module#EditarUsuarioPageModule' },
+  { path: 'buscar', loadChildren: './buscar/buscar.module#BuscarPageModule' },
+  { path: 'registraGrupos', loadChildren: './registra-grupos/registra-grupos.module#RegistraGruposPageModule' },
+
 
 
 

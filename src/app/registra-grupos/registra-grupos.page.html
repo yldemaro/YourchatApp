@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Registrar Grupo</ion-title>
+    <i [routerLink]="['/yourchatApp/grupos']" class="fas fa-arrow-left"></i>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+
+
+  <ion-list>
+    <div margin-top margin-bottom text-center>
+      <ion-button color="primary" (click)="cargarImagen()">
+        <ion-icon align-left name="camera"></ion-icon>
+      </ion-button>
+    </div>
+    <ion-item>
+      <ion-label position="floating" style="color: #999;">Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="grupo.nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating" style="color: #999;">Descripcion del Grupo</ion-label>
+      <ion-textarea maxlength="300" [(ngModel)]="grupo.desc"></ion-textarea>
+    </ion-item>
+    <br>
+    <ion-item margin-top margin-bottom style="border:none!important;">
+      <ion-label style="color: #999;">Categoria</ion-label>
+      <ion-select placeholder="Select One" name="categoria" [(ngModel)]="grupo.categoria">
+        <ion-select-option *ngFor="let categoria of categorias"> {{ categoria.nombre }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item text-center>
+      <ion-button color="secondary" (click)="crearGrupo()">Crear Grupo</ion-button>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
