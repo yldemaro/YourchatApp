@@ -17,11 +17,11 @@ export class RegisterService {
 
 
   crearGrupo(nombre: string, desc: string, categoria: string, uid: string, img) {
-    console.log(nombre);
-    console.log(desc);
-    console.log(categoria);
-    console.log(uid);
-    console.log(img);
+    alert(nombre);
+    alert(desc);
+    alert(categoria);
+    alert(uid);
+    alert(img);
     // Añadir la info del grupo y crearlo
     this.itemsCollection = this.afs.collection<any>(`chats/${nombre}/info`, ref => ref.orderBy('fecha', 'desc').limit(500));
     this.itemsCollection2 = this.afs.collection<any>(`users/${uid}/grupos`, ref => ref.orderBy('fecha', 'desc').limit(500));
@@ -73,7 +73,6 @@ export class RegisterService {
     };
     return this.itemsCollection6.add(grupo);
   }
-
 
 
 }

@@ -33,7 +33,7 @@ export class AppComponent {
         .subscribe(
           user => {
             if (user) {
-              //this.rout.navigateByUrl('yourchatApp/home');
+              this.rout.navigateByUrl('yourchatApp/home');
             } else {
               this.rout.navigateByUrl('/login');
             }

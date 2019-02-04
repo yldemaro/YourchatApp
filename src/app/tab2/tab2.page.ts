@@ -22,13 +22,17 @@ export class Tab2Page {
   // COGER TODOS LOS GRUPOS DEL USUARIO  Y MOSTRARLOS , TENEMOS UNA API EN NODE QUE CON E
 
   constructor(public afr: AngularFireAuth, public _cs: ServicesService) {
-    
-    this._cs.cargarGrupos().subscribe((data: any) => {
-      console.log(data.length);
-      this.loading2 = false;
-      this.grupos = data;
-      console.log(this.grupos);
-    });
+
+    setInterval(() => {
+      this._cs.cargarGrupos().subscribe((data: any) => {
+        console.log(data.length);
+        this.loading2 = false;
+        this.grupos = data;
+        console.log(this.grupos);
+      });
+    }, 3000);
+
+
     this.nogrupos = true;
   }
 }
