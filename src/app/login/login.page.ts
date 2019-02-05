@@ -16,7 +16,22 @@ export class LoginPage {
   email: string = '';
   password: string = '';
 
-  constructor(public afs: AngularFireAuth, public rout: Router) { }
+  constructor(public afs: AngularFireAuth, public rout: Router, public aut: AngularFireAuth) {
+
+    this.aut.authState
+      .subscribe(
+        user => {
+          if (user) {
+            this.rout.navigateByUrl('yourchatApp/home');
+          } else {
+            //this.rout.navigateByUrl('/login');
+          }
+        },
+        () => {
+         // this.rout.navigateByUrl('/login');
+        }
+      );
+  }
 
   async login() {
 

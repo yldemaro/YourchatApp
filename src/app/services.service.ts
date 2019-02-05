@@ -29,6 +29,7 @@ export class ServicesService {
   public tendencias: any[] = [];
   public grupos: any[] = [];
   public categorias: any[] = [];
+  public categoriasRutas: any[] = [];
   uid: string;
   public usuario: any = {};
   public chats: Mensaje[] = [];

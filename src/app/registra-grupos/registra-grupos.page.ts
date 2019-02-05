@@ -49,19 +49,21 @@ export class RegistraGruposPage implements OnInit {
     console.log(this.url);
   }
 
-  crearGrupo() {
-    const uid = localStorage.getItem('uid');
-    console.log(uid);
-    console.log(this.grupo.nombre, this.grupo.desc, this.grupo.categoria, uid, this.url);
 
+  guardar(forma: any) {
+    const uid = localStorage.getItem('uid');
+    const nombre = forma.value.nombre;
+    const desc = forma.value.desc;
+    const categoria = forma.value.categoria;
+    console.log(uid, nombre, desc, categoria, this.url);
     if (this.url === undefined) {
       this.url = 'assets/picture.png';
     }
+    setTimeout(() => {
+      this._register.crearGrupo(nombre, desc, categoria, uid, this.url);
+      this.route.navigateByUrl('/yourchatApp/grupos');
+    }, 3000);
 
-    this._register.crearGrupo(this.grupo.nombre, this.grupo.desc, uid, this.url);
-    this._register.agregarCategoria(this.grupo.categoria, this.grupo.desc, this.url);
-
-    this.route.navigateByUrl('/yourchatApp/grupos');
   }
 
   cargarImagen(data) {
