@@ -48,7 +48,7 @@ export class ServicesService {
   constructor(private afs: AngularFirestore, public afAuth: AngularFireAuth,
     private route: Router, private http: HttpClient, public camera: Camera) {
     this.afAuth.authState.subscribe(user => {
-      console.log('Estado', user);
+      // console.log('Estado', user);
       if (!user) {
         return;
       } else {
@@ -56,7 +56,6 @@ export class ServicesService {
         this.usuario.uid = user.uid;
         this.uid = user.uid;
         localStorage.setItem('uid', this.uid);
-        console.log(this.uid);
       }
     });
   }
@@ -102,7 +101,7 @@ export class ServicesService {
     const randomNumber = Math.floor(Math.random() * 256);
     console.log('Random number : ' + randomNumber);
     return new Promise((resolve, reject) => {
-      const storageRef = firebase.storage().ref(this.CARPETA_IMAGENES + randomNumber + '.jpg');//Firebase storage main path
+      const storageRef = firebase.storage().ref(`${this.CARPETA_IMAGENES}/${randomNumber} + '.jpg'`);
       // alert(storageRef);
 
       const metadata: firebase.storage.UploadMetadata = {
@@ -145,7 +144,7 @@ export class ServicesService {
 
   cargarGrupos() {
     const uid = localStorage.getItem('uid');
-    console.log(uid);
+    // console.log(uid);
     return this.http.get(`http://yourchat.openode.io/users/${uid}/groups`);
   }
 

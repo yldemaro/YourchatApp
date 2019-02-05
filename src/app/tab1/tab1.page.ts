@@ -25,13 +25,13 @@ export class Tab1Page {
 
     this._cs.cargarTendencias().subscribe((data2) => {
       this.loading1 = false;
-      console.log(data2);
+      // console.log(data2);
       this.tendencias = data2;
 
     });
 
     this._cs.cargarCategorias().subscribe((data3) => {
-      console.log(data3);
+      // console.log(data3);
       this.loading3 = false;
     });
 

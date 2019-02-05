@@ -23,7 +23,7 @@ export class EditarUsuarioPage implements OnInit {
   uid: string;
   usu: any[];
   url: any;
-  private CARPETA_IMAGENES = 'img';
+  private CARPETA_IMAGENES = 'profile';
 
   private galleryOptions: CameraOptions = {
     quality: 50,
@@ -103,8 +103,7 @@ export class EditarUsuarioPage implements OnInit {
     const randomNumber = Math.floor(Math.random() * 256);
     console.log('Random number : ' + randomNumber);
     return new Promise((resolve, reject) => {
-      const storageRef = firebase.storage().ref(this.CARPETA_IMAGENES + randomNumber + '.jpg');//Firebase storage main path
-      alert(storageRef);
+      const storageRef = firebase.storage().ref(`${this.CARPETA_IMAGENES}/${randomNumber} + '.jpg'`);
 
       const metadata: firebase.storage.UploadMetadata = {
         contentType: 'image/jpeg',

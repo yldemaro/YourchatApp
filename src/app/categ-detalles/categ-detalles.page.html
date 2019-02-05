@@ -1,7 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <i  [routerLink]="['/yourchatApp/home']" class="fas fa-arrow-left"></i>
-    <ion-title>categDetalles</ion-title>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="2"> <i [routerLink]="['/yourchatApp/home']" class="fas fa-arrow-left" style="font-size: 1.5rem"></i></ion-col>
+        <ion-col size="10"><h3>Detalles de Grupo</h3></ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
@@ -38,6 +42,6 @@
   </ion-grid>
 
   <div *ngIf="cat.length===0">
-    no tiene grupo asignado
+    no tiene grupo
   </div>
 </ion-content>

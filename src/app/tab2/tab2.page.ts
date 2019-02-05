@@ -25,10 +25,10 @@ export class Tab2Page {
 
     setInterval(() => {
       this._cs.cargarGrupos().subscribe((data: any) => {
-        console.log(data.length);
+        // console.log(data.length);
         this.loading2 = false;
         this.grupos = data;
-        console.log(this.grupos);
+        // console.log(this.grupos);
       });
     }, 3000);
 

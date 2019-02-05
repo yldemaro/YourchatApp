@@ -1,22 +1,26 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-title>
-            YOURCHAT
-        </ion-title>
-        <i *ngIf="_cs.usuario.uid" class="fas fa-search" style="color:white;margin-right: 3%;" [routerLink]="['/buscar']" routerLinkActive="router-link-active"></i>
+        <ion-grid>
+            <ion-row text-center>
+                <ion-col size="2">
+                    <ion-icon name="search" [routerLink]="['/buscar']" style="font-size: 1.5rem"></ion-icon>
+                </ion-col>
+                <ion-col size="8">
+                    <h3 no-margin> YOURCHAT</h3>
+                </ion-col>
+                <ion-col size="2">
+                    <ion-icon name="exit" (click)="signOut()" style="font-size: 1.5rem"></ion-icon>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+
+
     </ion-toolbar>
-    
+
 </ion-header>
 
 <ion-content>
-
-    <ion-grid>
-        <ion-row text-center>
-            <ion-col col-12>
-                <ion-button expand="full" color="danger" (click)="signOut()">Salir</ion-button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
 
     <div margin-top *ngIf="_cs.uid">
         <h2>Tendencias</h2>
@@ -24,10 +28,9 @@
     </div>
 
 
-
     <div *ngFor=" let variable of tendencias , let i = index">
 
-        <div class="media animated fadeIn" [routerLink]="['/chat' , variable.nombre ]" *ngIf="_cs.uid">
+        <div padding class="media animated fadeIn" [routerLink]="['/chat' , variable.nombre ]" *ngIf="_cs.uid">
             <div class="image-cropper">
                 <img style="margin-left:0%;" class="rounded" [src]='variable.url'>
             </div>
@@ -60,18 +63,22 @@
     <div text-center style="background-color:#00D4FF;color:white;">
         <div padding style="border-bottom:1px solid white;">
             <h3>YOURCHAT</h3>
-            <p>¡La primera app de chats dedicada a foros de todo tipo , para conocer a gente con mismas aficiones y encontrar nuevos hobbys!</p>
+            <p>¡La primera app de chats dedicada a foros de todo tipo , para conocer a gente con mismas aficiones y
+                encontrar nuevos hobbys!</p>
         </div>
         <div padding>
             <ul no-padding>
                 <li>
-                    <a target="_blank" href="https://yourchat.es/politica/privacidad.html">Términos y condiciones</a>
+                    <a class="text-white" target="_blank" href="https://yourchat.es/politica/privacidad.html">Términos
+                        y condiciones</a>
                 </li>
                 <li>
-                    <a target="_blank" href="https://www.instagram.com/yourchatapp/">Instagram</a>
+                    <a class="text-white" target="_blank" href="https://www.instagram.com/yourchatapp/">Instagram</a>
                 </li>
                 <li>
-                    <a target="_blank" href="https://www.facebook.com/YourChat-546659349100930">Facebook</a>
+                    <a class="text-white" target="_blank" href="https://www.facebook.com/YourChat-546659349100930">Facebook</a>
+                </li>
+
             </ul>
         </div>
     </div>

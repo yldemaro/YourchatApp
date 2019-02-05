@@ -27,7 +27,7 @@ export class CategDetallesPage implements OnInit {
 
   async cargardetallesCat() {
 
-    this.active.params.subscribe((data2: any) => {
+    await this.active.params.subscribe((data2: any) => {
       console.log(data2.nombre);
       this.ruta = data2.nombre;
     });

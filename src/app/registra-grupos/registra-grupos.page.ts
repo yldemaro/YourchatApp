@@ -54,7 +54,12 @@ export class RegistraGruposPage implements OnInit {
     console.log(uid);
     console.log(this.grupo.nombre, this.grupo.desc, this.grupo.categoria, uid, this.url);
 
-    this._register.crearGrupo(this.grupo.nombre, this.grupo.desc, this.grupo.categoria, uid, this.url);
+    if (this.url === undefined) {
+      this.url = 'assets/picture.png';
+    }
+
+    this._register.crearGrupo(this.grupo.nombre, this.grupo.desc, uid, this.url);
+    this._register.agregarCategoria(this.grupo.categoria, this.grupo.desc, this.url);
 
     this.route.navigateByUrl('/yourchatApp/grupos');
   }
@@ -100,8 +105,8 @@ export class RegistraGruposPage implements OnInit {
     const randomNumber = Math.floor(Math.random() * 256);
     console.log('Random number : ' + randomNumber);
     return new Promise((resolve, reject) => {
-      const storageRef = firebase.storage().ref(this.CARPETA_IMAGENES + randomNumber + '.jpg');//Firebase storage main path
-  
+      const storageRef = firebase.storage().ref(`${this.CARPETA_IMAGENES}/${randomNumber} + '.jpg'`);//Firebase storage main path
+
 
       const metadata: firebase.storage.UploadMetadata = {
         contentType: 'image/jpeg',
