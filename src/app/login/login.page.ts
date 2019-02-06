@@ -13,25 +13,10 @@ export class LoginPage {
   // He cambiado la variable de usuario por email
 
 
-  email: string = '';
-  password: string = '';
+  email= '';
+  password= '';
 
-  constructor(public afs: AngularFireAuth, public rout: Router, public aut: AngularFireAuth) {
-
-    this.aut.authState
-      .subscribe(
-        user => {
-          if (user) {
-            this.rout.navigateByUrl('yourchatApp/home');
-          } else {
-            //this.rout.navigateByUrl('/login');
-          }
-        },
-        () => {
-         // this.rout.navigateByUrl('/login');
-        }
-      );
-  }
+  constructor(public afs: AngularFireAuth, public rout: Router, public aut: AngularFireAuth) {}
 
   async login() {
 

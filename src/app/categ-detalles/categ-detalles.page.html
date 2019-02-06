@@ -1,47 +1,72 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="primary">
     <ion-grid>
       <ion-row>
         <ion-col size="2"> <i [routerLink]="['/yourchatApp/home']" class="fas fa-arrow-left" style="font-size: 1.5rem"></i></ion-col>
-        <ion-col size="10"><h3>Detalles de Grupo</h3></ion-col>
+        <ion-col size="10"><h3 no-margin>{{ruta}}</h3></ion-col>
       </ion-row>
     </ion-grid>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content padding>
+<ion-content>
 
-  <div *ngIf="_cs.usuario.uid">
-    <h3>GRUPOS</h3>
-    <ion-spinner name="bubbles" *ngIf="loading"></ion-spinner>
-
-
-    <div *ngIf='(_cs.grupos)?.length === 0'>
-
-      <br>
-      <div *ngIf='nogrupos === true'>
-        <img [routerLink]="['/buscar']" src="assets/nogrupos.png" class="rounded mx-auto d-block imagen-nogrupo " style="text-align: center">
-        <h4 style="text-align: center;color:#00D3FA;">No tienes todavia grupos!</h4>
-        <br>
-        <br>
+ <ion-grid>
+  <ion-row>
+    <ion-col margin-top text-left size="2"> <i [routerLink]="['/yourchatApp/home']" class="fas fa-arrow-left" style="font-size: 1.5rem; color:#999;"></i>
+    </ion-col>
+    <ion-col text-center size="10" style="height: 100%;"> 
+      <div style="margin-left: -10%;">
+        <h3 no-margin style="height: 100%; align-items: center;display: flex;
+        justify-content: center;font-weight: bold;">{{ruta}}</h3>
+        <p margin-top style="color:#999;">Categoria</p>
       </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
+<div>
+  <img src="http://www.janachristelle.com/wp-content/uploads/2017/07/13198605_10154055956156083_1211389568251666409_o.jpg" alt="" *ngIf="ruta==='Viajes'">
+  <img src="https://www.gtabase.com/images/red-dead-redemption-2/articles/red-dead-redemption-2-soundtrack-article-image-rdr2.jpg" alt="" *ngIf="ruta==='Videojuegos'">
+  <img src="https://shortlist.imgix.net/app/uploads/2018/01/23074753/someones-made-a-trailer-for-a-friends-reunion-movie-and-its-brilliant-1080x1080.jpg?w=1200&h=1200&fit=max&auto=format%2Ccompress" alt="" *ngIf="ruta==='Ocio'">
+  <img src="https://i.pinimg.com/originals/0d/e2/4f/0de24fc4f6c73b267e01c327e19f5048.jpg" alt="" *ngIf="ruta==='Programacion'">
+  <img src="https://i.pinimg.com/originals/a6/9f/69/a69f695c43af1abe35d9055f13b491ef.jpg" alt="" *ngIf="ruta==='Musica'">
+  <img src="https://lh3.googleusercontent.com/At_I9p1hha9oxoDPzQJEFTulVPQqOCqKEh48v5re8WTfIxd7SYTClzUWuIFkDDlISBsJzZt1UCYHBH6Vu5gD7cEjpWtTrqeqzE1NMRMnf9NlxRmsgjMQx2CYOyPGPYGgzVmXCouL" alt="" *ngIf="ruta==='Moda'">
+  <img src="http://e00-telva.uecdn.es/assets/multimedia/imagenes/2017/12/26/15142802048968.jpg" alt="" *ngIf="ruta==='Deporte'">
+  <img src="https://cdn.shopify.com/s/files/1/1111/6422/articles/DSC09854-1080x1080_d16012ec-09bb-493d-a57d-aeffe3dacab3.jpg?v=1540178385" alt="" *ngIf="ruta==='Cocina'">
+</div>
+
+<div *ngIf="_cs.usuario.uid">
+  <h3>GRUPOS</h3>
+  <ion-spinner name="bubbles" *ngIf="loading"></ion-spinner>
+
+
+  <div *ngIf='(_cs.grupos)?.length === 0'>
+
+    <br>
+    <div *ngIf='nogrupos === true'>
+      <img [routerLink]="['/buscar']" src="assets/nogrupos.png" class="rounded mx-auto d-block imagen-nogrupo " style="text-align: center">
+      <h4 style="text-align: center;color:#00D3FA;">No tienes todavia grupos!</h4>
+      <br>
+      <br>
     </div>
+
   </div>
+</div>
 
 
-  <ion-grid *ngFor="let categoria of cat" [routerLink]="['/chat' , categoria.nombre ]">
-    <ion-row *ngIf="_cs.usuario.uid">
-      <ion-col size='3'><img style="border-radius:50%;" height="59px" [src]='categoria.url' alt=""></ion-col>
-      <ion-col size='9'>
-        <h3 no-margin>{{categoria.nombre}}</h3>
-        <p no-margin style="font-size:12px;">{{categoria.desc}}</p>
-        <p float-right><small>{{categoria.fecha | date}}</small></p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-grid *ngFor="let categoria of cat" [routerLink]="['/chat' , categoria.nombre ]">
+  <ion-row *ngIf="_cs.usuario.uid">
+    <ion-col size='3'><img style="border-radius:50%;" height="59px" [src]='categoria.url' alt=""></ion-col>
+    <ion-col size='9'>
+      <h3 no-margin>{{categoria.nombre}}</h3>
+      <p no-margin style="font-size:12px;">{{categoria.desc}}</p>
+      <p float-right><small>{{categoria.fecha | date}}</small></p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
-  <div *ngIf="cat.length===0">
-    no tiene grupo
-  </div>
+<div *ngIf="cat.length===0">
+  no tiene grupo
+</div>
 </ion-content>

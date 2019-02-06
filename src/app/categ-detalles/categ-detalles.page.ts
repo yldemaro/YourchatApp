@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ServicesService } from '../services.service';
+import { CargaImagenesService } from '../provider/carga-imagenes.service';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-categ-detalles',
@@ -13,8 +16,11 @@ export class CategDetallesPage implements OnInit {
   cat: any = [];
   loading = true;
   uid: any;
+  private itemsCollection: AngularFirestoreCollection<any>;
+  public grupo2: any[] = [];
 
-  constructor(public active: ActivatedRoute, private http: HttpClient, public _cs: ServicesService) {
+  constructor(public active: ActivatedRoute, private http: HttpClient, public _cs: ServicesService, 
+    private cargarInfo : CargaImagenesService, private afs: AngularFirestore ,) {
 
     this.uid = this._cs.uid;
     console.log(this.uid);
@@ -23,6 +29,7 @@ export class CategDetallesPage implements OnInit {
 
   ngOnInit() {
     this.cargardetallesCat();
+
   }
 
   async cargardetallesCat() {

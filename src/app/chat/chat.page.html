@@ -1,7 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <i start [routerLink]="['/yourchatApp/home']" class="fas fa-arrow-left mx-2"></i>
-    <ion-title>{{variable}}</ion-title>
+     <ion-grid>
+      <ion-row>
+        <ion-col size="2"> <i [routerLink]="['/yourchatApp/home']" class="fas fa-arrow-left" style="font-size: 1.5rem"></i></ion-col>
+        <ion-col size="10"><h3 no-margin>{{variables}}</h3></ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 

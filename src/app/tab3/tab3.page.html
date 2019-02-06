@@ -1,17 +1,19 @@
-<ion-header>
-    <ion-toolbar color="primary">
-        <ion-button align-left [routerLink]="['/yourchatApp/home']"><i class="fas fa-arrow-left"></i></ion-button>
-        <ion-title>
-            My Chat
-        </ion-title>
-    </ion-toolbar>
-</ion-header>
-
 <ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col margin-top text-left size="2"> <i [routerLink]="['/yourchatApp/home']" class="fas fa-arrow-left" style="font-size: 1.5rem; color:#999;"></i>
+            </ion-col>
+            <ion-col text-center size="10" style="height: 100%;"> 
+                <div style="margin-left: -10%;">
+                    <h3 no-margin style="height: 100%; align-items: center;display: flex;
+                    justify-content: center;font-weight: bold;">MyChat</h3>
+                    <p margin-top style="color:#999;">{{ruta}}</p>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
-    <div text-center>
-        <h4 style="color:#999;">{{ruta}}</h4>
-    </div>
+
     <div text-center>
         <ion-spinner name="bubbles" *ngIf="loading"></ion-spinner>
     </div>
@@ -25,15 +27,15 @@
 
     <div *ngFor='let usuar of usu'>
         <div text-center>
-            <img width="50%" [src]="usuar.url" alt="" >
+            <img width="50%" [src]="usuar.url" alt="" style="border-radius: 50%;border:2px solid #E6E3E3;">
         </div>
 
         <ion-card>
             <ion-card-content>
                 <p style="color:rgb(175, 173, 173);">Nombre</p>
-                <h3>{{usuar.name}}</h3>
+                <h3 style="font-size: 1.8rem;font-weight: bold;color: black;">{{usuar.name}}</h3>
                 <p style="color:rgb(175, 173, 173);">Intereses</p>
-                <h4>{{usuar.desc}}</h4>
+                <h4 style="font-size: .7rem;font-weight: bold;color: black;">{{usuar.desc}}</h4>
             </ion-card-content>
         </ion-card>
     </div>
