@@ -1,14 +1,66 @@
 <ion-header>
-  <ion-toolbar color="primary">
-     <ion-grid>
-      <ion-row>
-        <ion-col size="2"> <i [routerLink]="['/yourchatApp/home']" class="fas fa-arrow-left" style="font-size: 1.5rem"></i></ion-col>
-        <ion-col size="10"><h3 no-margin>Buscar</h3></ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-toolbar>
+	<ion-toolbar color="primary">
+		<ion-grid>
+			<ion-row>
+				<ion-col size="2"> <i [routerLink]="['/yourchatApp/home']" class="fas fa-arrow-left" style="font-size: 1.5rem"></i></ion-col>
+				<ion-col size="10"><h3 no-margin>Buscar</h3></ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
+	<div class="input-group mb-3">
+		<input [(ngModel)]="searchterm" (keydown)="search($event)" style="border-color: #00d4ff;border-radius: 20px;" type="text" class="form-control"
+		placeholder="Buscar grupos!" aria-label="Buscar grupos!" aria-describedby="button-addon2">
+		<div class="input-group-append">
+			<button style="    border: none;
+			background: transparent;
+			position: absolute;
+			margin-left: -15%;
+			font-size: 1.8rem;" type="button" id="button-addon2">
+			<ion-icon name="search" style="color:#6c757d;"></ion-icon>	
+		</button>
+	</div>
+</div>
+
+<div margin-top style="color: #00d4ff"  *ngIf="_cs.usuario.uid">
+	<h5>Busqueda</h5>
+</div>
+
+<div margin-top *ngFor=" let club of clubs ">
+	<div class="media animated fadeIn" [routerLink]="['/chat' , club.nombre ]" *ngIf="_cs.usuario.uid">
+		<div class="image-cropper">
+			<img style="margin-left:0%;" class="rounded" [src]='club.url'>
+		</div>
+
+		<div class="media-body">
+			<h5 class="mt-0"> {{ club.nombre }}</h5>
+			{{ club.desc }}
+			<hr>
+		</div>
+	</div>
+</div>
+
+<div style="color: #00d4ff" class="main-container" *ngIf="_cs.usuario.uid">
+	<h5>Destacados</h5>
+</div>
+
+<ion-spinner name="bubbles" *ngIf="loading1"></ion-spinner>
+
+<div margin-top *ngFor=" let variable of tendencias , let i = index">
+	<div class="media animated fadeIn" [routerLink]="['/chat' , variable.nombre ]" *ngIf="_cs.usuario.uid">
+		<div class="image-cropper">
+			<img style="margin-left:0%;" class="rounded" [src]='variable.url'>
+		</div>
+
+		<div class="media-body">
+			<h5 class="mt-0"> {{ variable.nombre }}</h5>
+			{{ variable.desc }}
+			<hr>
+		</div>
+	</div>
+</div>
 
 </ion-content>

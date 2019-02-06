@@ -1,0 +1,50 @@
+.welcome-card ion-img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+
+ion-content{
+  padding:5px;
+}
+
+.image-cropper {
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: 50%;
+  float: left;
+}
+
+.image-cropper img {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+.media-body {
+  margin-left: 18px;
+}
+
+.imagen-nogrupo {
+  width: 30%!important;
+  text-align: center;
+}
+.categorias {
+  margin-bottom: 100px;
+}
+
+ul li{
+  list-style-type: none;
+}
